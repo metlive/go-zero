@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"context"
 	"errors"
+	"fmt"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -68,7 +69,7 @@ func Authorize(secret string, opts ...AuthorizeOption) func(http.Handler) http.H
 				unauthorized(w, r, errNoClaims, authOpts.Callback)
 				return
 			}
-
+			fmt.Println("==========", claims)
 			ctx := r.Context()
 			for k, v := range claims {
 				switch k {
